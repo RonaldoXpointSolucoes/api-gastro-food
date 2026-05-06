@@ -10,6 +10,14 @@ const options = {
     },
     servers: [
       {
+        url: 'https://apigastro.xpointsolucoes.com.br',
+        description: 'Produção (HTTPS)',
+      },
+      {
+        url: 'http://l0kkccs0cwwsgwkc088cw4wg.69.62.92.212.sslip.io',
+        description: 'Produção (Coolify Direto)',
+      },
+      {
         url: 'http://localhost:3000',
         description: 'Servidor Local',
       },

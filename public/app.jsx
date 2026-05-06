@@ -17,6 +17,7 @@ const App = () => {
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({ fkStore: '', softwareName: '' });
   const [creating, setCreating] = useState(false);
+  const [showDelphiModal, setShowDelphiModal] = useState(false);
   
   // Confirmação para exclusão
   const [confirmDelete, setConfirmDelete] = useState(null);
@@ -115,17 +116,29 @@ const App = () => {
             <Icon name="shield-check" className="text-white w-6 h-6" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold tracking-tight text-white">Gestão de Credenciais</h1>
+            <div className="flex items-center gap-3">
+              <h1 className="text-3xl font-bold tracking-tight text-white">Gestão de Credenciais</h1>
+              <span className="text-xs font-mono px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">v1.0.1</span>
+            </div>
             <p className="text-zinc-400 mt-1 text-sm">Gastro Food API - Controle de acesso de integrações ERP</p>
           </div>
         </div>
-        <button 
-          onClick={() => setShowModal(true)}
-          className="flex items-center gap-2 bg-zinc-100 text-zinc-900 hover:bg-white px-5 py-2.5 rounded-2xl font-medium transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.2)] hover:-translate-y-0.5"
-        >
-          <Icon name="plus" className="w-4 h-4" />
-          Novo Acesso
-        </button>
+        <div className="flex items-center gap-3">
+          <button 
+            onClick={() => setShowDelphiModal(true)}
+            className="flex items-center gap-2 bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20 border border-indigo-500/30 px-5 py-2.5 rounded-2xl font-medium transition-all shadow-[0_0_15px_rgba(99,102,241,0.1)] hover:shadow-[0_0_25px_rgba(99,102,241,0.2)] hover:-translate-y-0.5"
+          >
+            <Icon name="code-2" className="w-4 h-4" />
+            Guia Delphi REST
+          </button>
+          <button 
+            onClick={() => setShowModal(true)}
+            className="flex items-center gap-2 bg-zinc-100 text-zinc-900 hover:bg-white px-5 py-2.5 rounded-2xl font-medium transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.2)] hover:-translate-y-0.5"
+          >
+            <Icon name="plus" className="w-4 h-4" />
+            Novo Acesso
+          </button>
+        </div>
       </header>
 
       {/* Content */}
@@ -542,6 +555,128 @@ const App = () => {
 
                 </div>
               ) : null}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal Delphi Documentation */}
+      {showDelphiModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8">
+          <div className="absolute inset-0 bg-black/80 backdrop-blur-md" onClick={() => setShowDelphiModal(false)}></div>
+          
+          <div className="bg-[#121214] w-full max-w-4xl max-h-[90vh] rounded-[2rem] overflow-hidden relative z-10 animate-in-slide opacity-0 shadow-[0_0_50px_rgba(99,102,241,0.2)] border border-indigo-500/20 flex flex-col">
+            <div className="px-6 py-5 border-b border-zinc-800/80 flex items-center justify-between bg-surface/50 backdrop-blur-md z-20">
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-xl bg-indigo-500/10 flex items-center justify-center text-indigo-400 border border-indigo-500/20">
+                  <Icon name="terminal" className="w-5 h-5" />
+                </div>
+                <div>
+                  <h2 className="text-xl font-bold text-white">Integração Delphi REST Direta</h2>
+                  <p className="text-xs text-zinc-400 mt-0.5">Envio de Pedidos para o Supabase sem intermédio do Node.js</p>
+                </div>
+              </div>
+              <button 
+                onClick={() => setShowDelphiModal(false)}
+                className="w-8 h-8 rounded-full bg-surface border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-white"
+              >
+                <Icon name="x" className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto p-6 md:p-8 scrollbar-thin text-sm text-zinc-300">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div>
+                  <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
+                    <Icon name="info" className="w-4 h-4 text-indigo-400" /> 
+                    Regras de Negócio
+                  </h3>
+                  <ul className="space-y-2 list-disc list-inside text-zinc-400">
+                    <li>O ERP Delphi se comunicará <strong className="text-white">diretamente</strong> com a API REST nativa do Supabase.</li>
+                    <li>Deve-se utilizar a Tabela <strong className="text-white font-mono text-xs">APIGF_Pedidos</strong>.</li>
+                    <li>O campo <strong className="text-white font-mono text-xs">fkStore</strong> é <strong>Obrigatório</strong> e deve corresponder ao UUID da Empresa gerado neste painel.</li>
+                    <li>O campo <strong className="text-white font-mono text-xs">integrated</strong> DEVE ser enviado como <strong className="text-amber-400">false</strong> para que o sistema reconheça como pendente.</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
+                    <Icon name="network" className="w-4 h-4 text-indigo-400" />
+                    Parâmetros HTTP
+                  </h3>
+                  <div className="space-y-2 bg-surface p-4 rounded-xl border border-zinc-800">
+                    <p><strong className="text-zinc-500 w-24 inline-block">Método:</strong> <span className="text-emerald-400 font-mono">POST</span></p>
+                    <p><strong className="text-zinc-500 w-24 inline-block">Endpoint:</strong> <span className="text-zinc-300 break-all font-mono text-[11px]">&lt;URL_SUPABASE&gt;/rest/v1/APIGF_Pedidos</span></p>
+                    <div className="pt-2 mt-2 border-t border-zinc-800">
+                      <p className="text-xs font-semibold text-zinc-500 mb-1">Headers Obrigatórios:</p>
+                      <ul className="text-xs font-mono space-y-1">
+                        <li><span className="text-indigo-400">apikey:</span> &lt;SUPABASE_ANON_KEY&gt;</li>
+                        <li><span className="text-indigo-400">Authorization:</span> Bearer &lt;SUPABASE_ANON_KEY&gt;</li>
+                        <li><span className="text-indigo-400">Content-Type:</span> application/json</li>
+                        <li><span className="text-indigo-400">Prefer:</span> return=representation</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
+                <Icon name="code" className="w-4 h-4 text-indigo-400" />
+                Exemplo de Implementação (TRESTClient / Delphi)
+              </h3>
+              <div className="bg-[#0d0d0f] rounded-xl border border-zinc-800/80 p-4 overflow-x-auto">
+                <pre className="text-[12px] font-mono leading-relaxed text-zinc-300">
+                  <code dangerouslySetInnerHTML={{ __html: `
+<span class="text-indigo-400">procedure</span> EnviarPedidoSupabase;
+<span class="text-indigo-400">var</span>
+  RESTClient: TRESTClient;
+  RESTRequest: TRESTRequest;
+  RESTResponse: TRESTResponse;
+  JsonPayload: string;
+<span class="text-indigo-400">begin</span>
+  RESTClient := TRESTClient.Create(<span class="text-emerald-400">'https://URL_DO_PROJETO.supabase.co/rest/v1/APIGF_Pedidos'</span>);
+  RESTRequest := TRESTRequest.Create(<span class="text-indigo-400">nil</span>);
+  RESTResponse := TRESTResponse.Create(<span class="text-indigo-400">nil</span>);
+  <span class="text-indigo-400">try</span>
+    RESTRequest.Client := RESTClient;
+    RESTRequest.Response := RESTResponse;
+    RESTRequest.Method := rmPOST;
+
+    <span class="text-zinc-500">// Adicionando Headers de Autenticação do Supabase</span>
+    RESTRequest.Params.AddHeader(<span class="text-emerald-400">'apikey'</span>, <span class="text-emerald-400">'SUA_ANON_KEY_AQUI'</span>);
+    RESTRequest.Params.AddHeader(<span class="text-emerald-400">'Authorization'</span>, <span class="text-emerald-400">'Bearer SUA_ANON_KEY_AQUI'</span>);
+    RESTRequest.Params.AddHeader(<span class="text-emerald-400">'Prefer'</span>, <span class="text-emerald-400">'return=representation'</span>);
+    
+    <span class="text-zinc-500">// Montando o Body (Use TJSONObject em Produção)</span>
+    JsonPayload := <span class="text-emerald-400">'{'</span> +
+      <span class="text-emerald-400">'"fkStore": "UUID_DA_LOJA",'</span> +
+      <span class="text-emerald-400">'"module": 1,'</span> +
+      <span class="text-emerald-400">'"subTotal": 100.50,'</span> +
+      <span class="text-emerald-400">'"received": 100.50,'</span> +
+      <span class="text-emerald-400">'"discount": 0.0,'</span> +
+      <span class="text-emerald-400">'"cpf": "123.456.789-00",'</span> +
+      <span class="text-emerald-400">'"pagto": "PIX",'</span> +
+      <span class="text-emerald-400">'"accessName": "Cliente Exemplo",'</span> +
+      <span class="text-emerald-400">'"integrated": false,'</span> + <span class="text-zinc-500">// OBRIGATÓRIO SER FALSE</span>
+      <span class="text-emerald-400">'"items": [{"name": "X-Burger", "amount": 2, "price": 50.25}]'</span> +
+    <span class="text-emerald-400">'}'</span>;
+
+    RESTRequest.AddBody(JsonPayload, ctAPPLICATION_JSON);
+    RESTRequest.Execute;
+
+    <span class="text-indigo-400">if</span> RESTResponse.StatusCode = <span class="text-blue-400">201</span> <span class="text-indigo-400">then</span>
+      ShowMessage(<span class="text-emerald-400">'Pedido Inserido Diretamente no Banco via Delphi!'</span>)
+    <span class="text-indigo-400">else</span>
+      ShowMessage(<span class="text-emerald-400">'Erro: '</span> + RESTResponse.Content);
+      
+  <span class="text-indigo-400">finally</span>
+    RESTClient.Free;
+    RESTRequest.Free;
+    RESTResponse.Free;
+  <span class="text-indigo-400">end</span>;
+<span class="text-indigo-400">end</span>;`}} />
+                </pre>
+              </div>
+
             </div>
           </div>
         </div>
