@@ -30,7 +30,8 @@ app.use('/api/admin', adminRouter);
 // Interface Administrativa (Painel Premium Frontend)
 app.use('/admin', express.static(path.join(__dirname, '../public')));
 
-// Rota de Health Check
+// Rota de Health Check para o Coolify (na raiz e em /health)
+app.get('/', (req, res) => res.redirect('/admin'));
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok', version: '1.0.0' });
 });
