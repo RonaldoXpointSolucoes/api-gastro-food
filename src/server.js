@@ -17,7 +17,12 @@ app.use(express.json());
 // Rota de documentação (Swagger)
 // Configurando um CSS customizado para aparência mais limpa
 const swaggerUiOptions = {
-  customCss: '.swagger-ui .topbar { display: none }'
+  customCss: '.swagger-ui .topbar { display: none }',
+  customCssUrl: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.11.0/swagger-ui.min.css',
+  customJs: [
+    'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.11.0/swagger-ui-bundle.min.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.11.0/swagger-ui-standalone-preset.min.js'
+  ]
 };
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs, swaggerUiOptions));
 
