@@ -118,7 +118,7 @@ const App = () => {
           <div>
             <div className="flex items-center gap-3">
               <h1 className="text-3xl font-bold tracking-tight text-white">Gestão de Credenciais</h1>
-              <span className="text-xs font-mono px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">v1.0.1</span>
+              <span className="text-xs font-mono px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">v2.0.5</span>
             </div>
             <p className="text-zinc-400 mt-1 text-sm">Gastro Food API - Controle de acesso de integrações ERP</p>
           </div>
