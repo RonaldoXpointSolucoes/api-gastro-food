@@ -5,7 +5,7 @@ const options = {
     openapi: '3.0.0',
     info: {
       title: 'API Gastro Food',
-      version: '2.0.6',
+      version: '2.0.7',
       description: `## Bem-vindo à Documentação Oficial da Gastro Food API
 Esta API permite a integração transparente entre plataformas externas (ERPs, PDVs, Sistemas de Gestão) e a base de dados da Gastro Food.
 
@@ -37,7 +37,7 @@ const axios = require('axios');
 
 async function buscarPedidosPendentes() {
   try {
-    const response = await axios.get('https://api-gastro-food.vercel.app/api/orders', {
+    const response = await axios.get('https://apigastro.xpointsolucoes.com.br/api/orders', {
       headers: {
         'Authorization': 'Bearer SEU_TOKEN_AQUI'
       },
@@ -63,7 +63,7 @@ var
   RESTRequest: TRESTRequest;
   RESTResponse: TRESTResponse;
 begin
-  RESTClient := TRESTClient.Create('https://api-gastro-food.vercel.app/api/orders?fkStore=UUID_DA_LOJA');
+  RESTClient := TRESTClient.Create('https://apigastro.xpointsolucoes.com.br/api/orders?fkStore=UUID_DA_LOJA');
   RESTRequest := TRESTRequest.Create(nil);
   RESTResponse := TRESTResponse.Create(nil);
   try
@@ -97,7 +97,7 @@ end;
 $curl = curl_init();
 
 curl_setopt_array($curl, [
-  CURLOPT_URL => "https://api-gastro-food.vercel.app/api/orders?fkStore=UUID_DA_LOJA",
+  CURLOPT_URL => "https://apigastro.xpointsolucoes.com.br/api/orders?fkStore=UUID_DA_LOJA",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_HTTPHEADER => [
     "Authorization: Bearer SEU_TOKEN_AQUI"
@@ -125,7 +125,7 @@ if ($err) {
 OkHttpClient client = new OkHttpClient();
 
 Request request = new Request.Builder()
-  .url("https://api-gastro-food.vercel.app/api/orders?fkStore=UUID_DA_LOJA")
+  .url("https://apigastro.xpointsolucoes.com.br/api/orders?fkStore=UUID_DA_LOJA")
   .get()
   .addHeader("Authorization", "Bearer SEU_TOKEN_AQUI")
   .build();
